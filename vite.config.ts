@@ -13,8 +13,6 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [react(), basicSsl()],
       define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GOOGLE_FORM_URL': JSON.stringify(env.GOOGLE_FORM_URL)
       },
       resolve: {

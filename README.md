@@ -11,14 +11,12 @@ View your app in AI Studio: https://ai.studio/apps/drive/17eKJzhXyxzEBzJbf-YwhQQ
 ## Features
 
 - 🎨 Modern, minimalist landing page design
-- 🤖 Interactive AI strategy generator powered by Gemini API
 - 🌐 Bilingual support (Japanese/English)
 - ⚡ Built with React, TypeScript, and Vite
 
 ## Prerequisites
 
 - **Node.js** (v18 or higher recommended)
-- **Gemini API Key** - Get yours at [Google AI Studio](https://aistudio.google.com/app/apikey)
 
 ## Setup
 
@@ -33,19 +31,7 @@ View your app in AI Studio: https://ai.studio/apps/drive/17eKJzhXyxzEBzJbf-YwhQQ
    npm install
    ```
 
-3. **Configure environment variables**
-   
-   Copy the example environment file:
-   ```bash
-   cp .env.example .env.local
-   ```
-   
-   Then edit `.env.local` and add your Gemini API key:
-   ```
-   GEMINI_API_KEY=your_actual_api_key_here
-   ```
-
-4. **Run the development server**
+3. **Run the development server**
    ```bash
    npm run dev
    ```
@@ -58,6 +44,41 @@ View your app in AI Studio: https://ai.studio/apps/drive/17eKJzhXyxzEBzJbf-YwhQQ
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build locally
 
+## Deployment
+
+This application is deployed on **Firebase Hosting**.
+
+### Production URL
+
+🌐 **Live Site**: https://makaninlabs.com
+
+> **Note**: Also accessible via https://block-drop-le7hp.web.app
+
+### Deploy to Firebase Hosting
+
+1. **Install Firebase CLI** (if not already installed)
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. **Login to Firebase**
+   ```bash
+   firebase login
+   ```
+
+3. **Build the production bundle**
+   ```bash
+   npm run build
+   ```
+
+4. **Deploy to Firebase Hosting**
+   ```bash
+   firebase deploy --only hosting
+   ```
+
+> **Note**: Make sure you have the necessary permissions for the Firebase project `block-drop-le7hp`.
+
+
 ## Project Structure
 
 ```
@@ -67,10 +88,7 @@ makaninlabs/
 │   ├── Hero.tsx
 │   ├── Services.tsx
 │   ├── ContactSection.tsx
-│   ├── Footer.tsx
-│   └── AIStrategyGenerator.tsx
-├── services/           # API services
-│   └── geminiService.ts
+│   └── Footer.tsx
 ├── App.tsx            # Main application component
 ├── index.tsx          # Application entry point
 ├── index.html         # HTML template
@@ -84,16 +102,8 @@ makaninlabs/
 - **TypeScript** - Type-safe development
 - **Vite** - Fast build tool
 - **Tailwind CSS** - Utility-first CSS framework (via CDN)
-- **Google Gemini API** - AI-powered content generation
 
 ## Troubleshooting
-
-### API Key Issues
-
-If you encounter errors related to the API key:
-- Ensure your `.env.local` file exists and contains a valid `GEMINI_API_KEY`
-- Verify your API key is active at [Google AI Studio](https://aistudio.google.com/app/apikey)
-- Restart the development server after changing environment variables
 
 ### Build Errors
 
