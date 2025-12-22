@@ -64,29 +64,29 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-48 bg-white border-t border-[#E5E5E5]">
       {/* Google フォーム送信用の隠し iframe */}
       <iframe name="hidden_iframe" id="hidden_iframe" style={{display: 'none'}}></iframe>
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-sm font-bold text-blue-600 tracking-widest uppercase mb-4">{t.section}</h2>
-            <h3 className="text-4xl font-bold text-slate-900 mb-6">{t.heading}</h3>
-            <p className="text-slate-500 leading-relaxed">
+          <div className="text-center mb-24">
+            <h2 className="text-xs font-bold text-[#333333] tracking-[0.3em] uppercase mb-6 flex items-center justify-center gap-4">
+              <span className="w-12 h-px bg-[#FFE600]"></span>
+              {t.section}
+              <span className="w-12 h-px bg-[#FFE600]"></span>
+            </h2>
+            <h3 className="text-5xl md:text-6xl font-serif text-[#333333] mb-8 italic">{t.heading}</h3>
+            <p className="text-[#666666] leading-[2.0] text-lg font-light max-w-2xl mx-auto">
               {t.description}
             </p>
           </div>
 
-          <div className="bg-slate-50 p-8 md:p-12 rounded-[2rem] border border-slate-100 shadow-sm transition-all duration-500">
+          <div className="bg-[#F9F9F9] p-10 md:p-20 border border-[#E5E5E5] transition-all duration-700">
             {submitted ? (
-              <div className="text-center py-12 animate-fade-in">
-                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h4 className="text-2xl font-bold text-slate-900 mb-2">{t.successTitle}</h4>
-                <p className="text-slate-600">{t.successText}</p>
+              <div className="text-center py-16 animate-fade-in">
+                <div className="w-20 h-px bg-[#FFE600] mx-auto mb-10"></div>
+                <h4 className="text-3xl font-serif text-[#333333] mb-6">{t.successTitle}</h4>
+                <p className="text-[#666666] leading-relaxed">{t.successText}</p>
               </div>
             ) : (
               <form 
@@ -94,64 +94,59 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
                 action="https://docs.google.com/forms/d/e/1FAIpQLSdExADzQVDQZnKlN_KxupVcHd0gmdy2oUnC2BZLvIeDyCResA/formResponse"
                 target="hidden_iframe"
                 method="POST"
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                className="grid grid-cols-1 md:grid-cols-2 gap-10"
               >
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelName} <span className="text-red-500">*</span></label>
+                <div className="space-y-4">
+                  <label className="text-xs font-bold text-[#333333] tracking-widest uppercase">{t.labelName} <span className="text-[#FFE600] underline">*</span></label>
                   <input
                     name="entry.464670817"
                     required
                     type="text"
                     placeholder={t.placeholderName}
-                    className="w-full px-5 py-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-0 py-4 bg-transparent border-b border-[#CCCCCC] focus:border-[#333333] outline-none transition-all placeholder:text-[#BBBBBB] text-lg font-light"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelCompany} <span className="text-red-500">*</span></label>
+                <div className="space-y-4">
+                  <label className="text-xs font-bold text-[#333333] tracking-widest uppercase">{t.labelCompany} <span className="text-[#FFE600] underline">*</span></label>
                   <input
                     name="entry.609499387"
                     required
                     type="text"
                     placeholder={t.placeholderCompany}
-                    className="w-full px-5 py-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-0 py-4 bg-transparent border-b border-[#CCCCCC] focus:border-[#333333] outline-none transition-all placeholder:text-[#BBBBBB] text-lg font-light"
                   />
                 </div>
-                <div className="md:col-span-2 space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelEmail} <span className="text-red-500">*</span></label>
+                <div className="md:col-span-2 space-y-4">
+                  <label className="text-xs font-bold text-[#333333] tracking-widest uppercase">{t.labelEmail} <span className="text-[#FFE600] underline">*</span></label>
                   <input
                     name="emailAddress"
                     required
                     type="email"
                     placeholder={t.placeholderEmail}
-                    className="w-full px-5 py-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-0 py-4 bg-transparent border-b border-[#CCCCCC] focus:border-[#333333] outline-none transition-all placeholder:text-[#BBBBBB] text-lg font-light"
                   />
                 </div>
-                <div className="md:col-span-2 space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelMessage}</label>
+                <div className="md:col-span-2 space-y-4">
+                  <label className="text-xs font-bold text-[#333333] tracking-widest uppercase">{t.labelMessage}</label>
                   <textarea
                     name="entry.1321229048"
-                    rows={5}
+                    rows={4}
                     placeholder={t.placeholderMessage}
-                    className="w-full px-5 py-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+                    className="w-full px-0 py-4 bg-transparent border-b border-[#CCCCCC] focus:border-[#333333] outline-none transition-all resize-none placeholder:text-[#BBBBBB] text-lg font-light"
                   ></textarea>
                 </div>
-                <div className="md:col-span-2 mt-4">
+                <div className="md:col-span-2 mt-8">
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className={`w-full py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 flex items-center justify-center space-x-2 ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    className={`w-full py-6 bg-[#333333] text-white font-bold tracking-[0.4em] uppercase hover:bg-[#FFE600] hover:text-[#333333] transition-all duration-700 shadow-2xl shadow-gray-200 flex items-center justify-center space-x-4 ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
                     {isLoading ? (
-                      <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
+                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                     ) : (
                       <>
-                        <span>{t.submitBtn}</span>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
+                        <span className="text-xs">{t.submitBtn}</span>
+                        <svg className="w-6 h-px bg-current" viewBox="0 0 24 1"></svg>
                       </>
                     )}
                   </button>
