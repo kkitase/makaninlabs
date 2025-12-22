@@ -25,3 +25,7 @@ dist-ssr
 
 # Firebase
 .firebase/
+
+# Internal documentation and agent files
+Tips/
+.agent/
