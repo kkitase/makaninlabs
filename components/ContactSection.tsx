@@ -17,8 +17,7 @@ const content = {
     placeholderCompany: '株式会社Makanin',
     placeholderEmail: 'example@makanin.labs',
     placeholderMessage: 'ご相談内容をご記入ください。',
-    submitBtn: '内容を送信する',
-    privacyText: '送信いただく前にプライバシーポリシーをご確認ください。'
+    submitBtn: '内容を送信する'
   },
   en: {
     section: 'Contact',
@@ -34,8 +33,7 @@ const content = {
     placeholderCompany: 'Makanin Corp',
     placeholderEmail: 'example@makanin.labs',
     placeholderMessage: 'How can we help you?',
-    submitBtn: 'Send Message',
-    privacyText: 'Please check our Privacy Policy before submitting.'
+    submitBtn: 'Send Message'
   }
 };
 
@@ -44,31 +42,31 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     
-    try {
-      // Googleフォームを新しいタブで開く
-      const googleFormUrl = process.env.GOOGLE_FORM_URL || 'https://forms.google.com';
-      window.open(googleFormUrl, '_blank');
-      
-      // 成功メッセージを表示
+    // フォームを送信(iframe に送信されるため、ページ遷移は発生しない)
+    const form = e.currentTarget;
+    form.submit();
+    
+    // 成功メッセージを表示
+    setTimeout(() => {
       setSubmitted(true);
       setIsLoading(false);
+      form.reset();
       
-      // 5秒後にメッセージを非表示
+      // 5秒後にフォームを再表示
       setTimeout(() => {
         setSubmitted(false);
       }, 5000);
-    } catch (error) {
-      console.error("Failed to open form:", error);
-      setIsLoading(false);
-    }
+    }, 500); // Google フォームへの送信を待つため、わずかに遅延
   };
 
   return (
     <section id="contact" className="py-24 bg-white">
+      {/* Google フォーム送信用の隠し iframe */}
+      <iframe name="hidden_iframe" id="hidden_iframe" style={{display: 'none'}}></iframe>
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
@@ -91,11 +89,17 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
                 <p className="text-slate-600">{t.successText}</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form 
+                onSubmit={handleSubmit}
+                action="https://docs.google.com/forms/d/e/1FAIpQLSdExADzQVDQZnKlN_KxupVcHd0gmdy2oUnC2BZLvIeDyCResA/formResponse"
+                target="hidden_iframe"
+                method="POST"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700 ml-1">{t.labelName} <span className="text-red-500">*</span></label>
                   <input
-                    name="name"
+                    name="entry.464670817"
                     required
                     type="text"
                     placeholder={t.placeholderName}
@@ -103,9 +107,10 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelCompany}</label>
+                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelCompany} <span className="text-red-500">*</span></label>
                   <input
-                    name="company"
+                    name="entry.609499387"
+                    required
                     type="text"
                     placeholder={t.placeholderCompany}
                     className="w-full px-5 py-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
@@ -114,7 +119,7 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
                 <div className="md:col-span-2 space-y-2">
                   <label className="text-sm font-bold text-slate-700 ml-1">{t.labelEmail} <span className="text-red-500">*</span></label>
                   <input
-                    name="email"
+                    name="emailAddress"
                     required
                     type="email"
                     placeholder={t.placeholderEmail}
@@ -122,10 +127,9 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
                   />
                 </div>
                 <div className="md:col-span-2 space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelMessage} <span className="text-red-500">*</span></label>
+                  <label className="text-sm font-bold text-slate-700 ml-1">{t.labelMessage}</label>
                   <textarea
-                    name="message"
-                    required
+                    name="entry.1321229048"
                     rows={5}
                     placeholder={t.placeholderMessage}
                     className="w-full px-5 py-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
@@ -151,14 +155,6 @@ export const ContactSection: React.FC<{ lang: Language }> = ({ lang }) => {
                       </>
                     )}
                   </button>
-                  <p className="text-center text-xs text-slate-400 mt-4">
-                    {t.privacyText.split('プライバシーポリシー').map((part, i, arr) => (
-                      <React.Fragment key={i}>
-                        {part}
-                        {i < arr.length - 1 && <a href="#" className="underline hover:text-slate-600">{lang === 'ja' ? 'プライバシーポリシー' : 'Privacy Policy'}</a>}
-                      </React.Fragment>
-                    ))}
-                  </p>
                 </div>
               </form>
             )}

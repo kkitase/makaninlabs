@@ -34,12 +34,12 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, lang, setLang }) => {
               EN
             </button>
           </div>
-          <button 
-            onClick={() => window.open(process.env.GOOGLE_FORM_URL || 'https://forms.google.com', '_blank')}
+          <a 
+            href="#contact"
             className="px-5 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all shadow-md"
           >
             {lang === 'ja' ? 'お問い合わせ' : 'Contact'}
-          </button>
+          </a>
         </nav>
       </div>
     </header>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
+import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 
 export type Language = 'ja' | 'en';
@@ -25,6 +26,7 @@ const App: React.FC = () => {
       <main className="flex-grow">
         <Hero lang={lang} />
         <Services lang={lang} />
+        <ContactSection lang={lang} />
       </main>
       <Footer lang={lang} />
     </div>

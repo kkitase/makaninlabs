@@ -5,15 +5,11 @@ import { Language } from '../App';
 const content = {
   ja: {
     tagline: 'AIとデータの力で、日本のマーケティングに新しいスタンダードを。',
-    copyright: '© 2024 Makanin Labs All Rights Reserved.',
-    privacy: 'プライバシーポリシー',
-    terms: '利用規約'
+    copyright: '© 2024 Makanin Labs All Rights Reserved.'
   },
   en: {
     tagline: 'Creating a new standard for marketing through the power of AI and data.',
-    copyright: '© 2024 Makanin Labs All Rights Reserved.',
-    privacy: 'Privacy Policy',
-    terms: 'Terms of Service'
+    copyright: '© 2024 Makanin Labs All Rights Reserved.'
   }
 };
 
@@ -36,12 +32,9 @@ export const Footer: React.FC<{ lang: Language }> = ({ lang }) => {
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+        
+        <div className="flex flex-col md:flex-row justify-center items-center text-sm text-slate-500">
           <p>{t.copyright}</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">{t.privacy}</a>
-            <a href="#" className="hover:text-white transition-colors">{t.terms}</a>
-          </div>
         </div>
       </div>
     </footer>
