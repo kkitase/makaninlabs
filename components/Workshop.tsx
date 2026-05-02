@@ -29,7 +29,7 @@ export const Workshop: React.FC = () => {
             Workshop
           </h2>
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12">
-            <h3 className="text-5xl md:text-7xl font-serif text-[#333333] leading-[1.4]">依頼形態</h3>
+            <h3 className="text-4xl md:text-6xl font-serif text-[#333333] leading-[1.5]">依頼形態</h3>
             <p className="text-[#666666] max-w-xl leading-[2.0] text-lg font-light">
               貴社の課題に合わせた、カスタム形式で提供します。決まったコースはありません。
             </p>
