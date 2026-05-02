@@ -37,7 +37,7 @@ export const Topics: React.FC = () => {
             Topics
           </h2>
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12">
-            <h3 className="text-5xl md:text-7xl font-serif text-[#333333] leading-[1.2]">3 つの専門領域</h3>
+            <h3 className="text-5xl md:text-7xl font-serif text-[#333333] leading-[1.4]">3 つの専門領域</h3>
             <p className="text-[#666666] max-w-xl leading-[2.0] text-lg font-light">
               私たちが講演・ワークショップで扱う 3 つの領域です。組織導入から実務、ハンズオンまで一貫して支援します。
             </p>

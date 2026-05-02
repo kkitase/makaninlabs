@@ -14,13 +14,12 @@ export const Hero: React.FC = () => {
           <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold uppercase tracking-[0.2em] text-[#333333] border-b-2 border-[#FFE600]">
             私たちが目指すこと
           </span>
-          <h1 className="text-[2.8rem] md:text-[4.5rem] lg:text-[6rem] font-serif text-[#333333] leading-[1.2] mb-12 animate-fade-in">
-            AI 時代のマーケターを、<br />
-            <span className="block mb-4">現場で</span>
-            <span className="italic block mt-4 border-l-8 border-[#FFE600] pl-6 ml-[-12px]">育てる。</span>
+          <h1 className="text-[2.8rem] md:text-[4.5rem] lg:text-[6rem] font-serif text-[#333333] leading-[1.4] mb-12 animate-fade-in">
+            AI とマーケティング、<br />
+            <span className="italic block mt-4 border-l-8 border-[#FFE600] pl-6 ml-[-12px]">付き合い方を考える。</span>
           </h1>
           <p className="text-xl md:text-2xl text-[#666666] leading-[2.0] max-w-2xl mb-16 opacity-90 font-light">
-            生成 AI は触れる人がいて初めて武器になります。Makanin Labs は、企業のマーケティング組織に向けた講演・カスタムワークショップで、"明日から使える" 知識と判断軸を提供します。
+            <span className="whitespace-nowrap">生成 AI</span> で何が変わり、何から始めればいいのか。答えは業界・組織・規模ごとに違います。Makanin Labs は、講演やカスタムワークショップを通じて、貴社のマーケティングに合った "AI との付き合い方" を、一緒に組み立てます。
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
