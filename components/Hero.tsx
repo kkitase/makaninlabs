@@ -24,7 +24,7 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
-            <a href="#contact" className="px-10 py-5 bg-[#333333] text-white font-bold rounded-none hover:bg-[#FFE600] hover:text-[#333333] transition-all duration-500 shadow-xl shadow-gray-100 text-center tracking-widest uppercase text-sm">
+            <a href="#contact" className="px-10 py-5 bg-[#333333] text-white font-bold rounded-none hover:bg-[#FFE600] hover:text-[#333333] transition-all duration-500 shadow-xl shadow-gray-100 text-center tracking-widest uppercase text-xs">
               講演・ワークショップを依頼する
             </a>
           </div>
