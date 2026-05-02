@@ -28,7 +28,7 @@ const App: React.FC = () => {
         <Hero />
         <Topics />
         <Workshop />
-        <ContactSection lang={lang} />
+        <ContactSection />
       </main>
       <Footer />
     </div>
