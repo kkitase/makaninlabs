@@ -1,20 +1,7 @@
 
 import React from 'react';
-import { Language } from '../App';
 
-const content = {
-  ja: {
-    tagline: 'AIとデータの力で、日本のマーケティングに新しいスタンダードを。',
-    copyright: '© 2024 Makanin Labs All Rights Reserved.'
-  },
-  en: {
-    tagline: 'Creating a new standard for marketing through the power of AI and data.',
-    copyright: '© 2024 Makanin Labs All Rights Reserved.'
-  }
-};
-
-export const Footer: React.FC<{ lang: Language }> = ({ lang }) => {
-  const t = content[lang];
+export const Footer: React.FC = () => {
   return (
     <footer className="bg-white text-[#333333] py-32 border-t border-[#E5E5E5]">
       <div className="container mx-auto px-6">
@@ -27,7 +14,7 @@ export const Footer: React.FC<{ lang: Language }> = ({ lang }) => {
               <span className="text-3xl font-serif tracking-widest uppercase">Makanin Labs</span>
             </div>
             <p className="text-[#666666] leading-[2.0] text-lg font-light italic">
-              {t.tagline}
+              AI とデータの力で、日本のマーケティングに新しいスタンダードを。
             </p>
           </div>
           <div className="hidden md:block">
@@ -35,9 +22,9 @@ export const Footer: React.FC<{ lang: Language }> = ({ lang }) => {
             <p className="text-[10px] tracking-[0.3em] uppercase text-[#CCCCCC]">Towards Sincerity</p>
           </div>
         </div>
-        
+
         <div className="flex flex-col md:flex-row justify-between items-center text-[10px] tracking-[0.2em] text-[#BBBBBB] uppercase">
-          <p>{t.copyright}</p>
+          <p>© 2026 Makanin Labs All Rights Reserved.</p>
           <p className="mt-4 md:mt-0 font-serif lowercase italic">crafted with sincerity.</p>
         </div>
       </div>

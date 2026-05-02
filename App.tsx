@@ -28,7 +28,7 @@ const App: React.FC = () => {
         <Services lang={lang} />
         <ContactSection lang={lang} />
       </main>
-      <Footer lang={lang} />
+      <Footer />
     </div>
   );
 };
