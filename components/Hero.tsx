@@ -14,7 +14,7 @@ export const Hero: React.FC = () => {
           <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold uppercase tracking-[0.2em] text-[#333333] border-b-2 border-[#FFE600]">
             私たちが目指すこと
           </span>
-          <h1 className="text-[2.8rem] md:text-[4.5rem] lg:text-[6rem] font-serif text-[#333333] leading-[1.4] mb-12 animate-fade-in">
+          <h1 className="text-[2rem] md:text-[3.5rem] lg:text-[5rem] font-serif text-[#333333] leading-[1.4] mb-12 animate-fade-in">
             AI とマーケティング、<br />
             <span className="italic block mt-4 border-l-8 border-[#FFE600] pl-6 ml-[-12px]">付き合い方を考える。</span>
           </h1>
