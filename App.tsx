@@ -7,11 +7,8 @@ import { Workshop } from './components/Workshop';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 
-export type Language = 'ja' | 'en';
-
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [lang, setLang] = useState<Language>('ja');
 
   useEffect(() => {
     const handleScroll = () => {
