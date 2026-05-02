@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { Services } from './components/Services';
+import { Topics } from './components/Topics';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 
@@ -25,7 +25,7 @@ const App: React.FC = () => {
       <Header scrolled={scrolled} lang={lang} setLang={setLang} />
       <main className="flex-grow">
         <Hero />
-        <Services lang={lang} />
+        <Topics />
         <ContactSection lang={lang} />
       </main>
       <Footer />
