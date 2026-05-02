@@ -18,7 +18,7 @@ export const Hero: React.FC = () => {
             AI とマーケティング、<br />
             <span className="italic block mt-4 border-l-8 border-[#FFE600] pl-6 ml-[-12px]">付き合い方を考える。</span>
           </h1>
-          <p className="text-xl md:text-2xl text-[#666666] leading-[2.0] max-w-2xl mb-16 opacity-90 font-light">
+          <p className="text-base md:text-lg text-[#666666] leading-[2.0] max-w-2xl mb-16 opacity-90 font-light">
             <span className="whitespace-nowrap">生成 AI</span> で何が変わり、何から始めればいいのか。答えは業界・組織・規模ごとに違います。Makanin Labs は、講演やカスタムワークショップを通じて、貴社のマーケティングに合った "AI との付き合い方" を、一緒に組み立てます。
           </p>
 
