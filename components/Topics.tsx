@@ -54,7 +54,7 @@ export const Topics: React.FC = () => {
               </div>
 
               <h4 className="text-2xl font-serif mb-3 text-[#333333] group-hover:translate-x-2 transition-transform duration-500">{item.title}</h4>
-              <p className="text-sm font-bold tracking-wider text-[#999999] mb-6 uppercase">{item.subtitle}</p>
+              <p className="text-sm font-bold tracking-wider text-[#999999] mb-6">{item.subtitle}</p>
               <p className="text-[#666666] leading-[2.0] text-base font-light opacity-80 group-hover:opacity-100 transition-opacity duration-500">
                 {item.description}
               </p>
