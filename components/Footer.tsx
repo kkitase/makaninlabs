@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
               <span className="text-3xl font-serif tracking-widest uppercase">Makanin Labs</span>
             </div>
             <p className="text-[#666666] leading-[2.0] text-lg font-light italic">
-              AI とデータの力で、日本のマーケティングに新しいスタンダードを。
+              AI の力で、マーケティングに新しいスタンダードを。
             </p>
           </div>
           <div className="hidden md:block">
