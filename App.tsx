@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-blue-100">
-      <Header scrolled={scrolled} lang={lang} setLang={setLang} />
+      <Header scrolled={scrolled} />
       <main className="flex-grow">
         <Hero />
         <Topics />
