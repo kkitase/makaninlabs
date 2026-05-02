@@ -75,6 +75,111 @@ makaninlabs/
 
 ---
 
+# アーキテクチャ
+
+サーバーサイドのレンダリングや API は持たない、純粋な **静的 SPA 配信** 構成。動的処理が必要な「お問い合わせ送信」だけを Google Forms に外出ししている。
+
+## 全体図
+
+```
+┌──────────┐
+│ ブラウザ │ https://makaninlabs.com
+└────┬─────┘
+     │
+     │ ① DNS 解決（→ 詳細は「ドメイン・DNS 構成」セクション）
+     ▼
+┌──────────────────────────────────────┐
+│ Firebase Hosting Ingress              │
+│ (199.36.158.100 / Fastly CDN 経由)    │
+└────┬─────────────────────────────────┘
+     │ ② SNI で makaninlabs.com を判別
+     │    TXT レコードから makaninlabs-web プロジェクトと特定
+     ▼
+┌──────────────────────────────────────┐
+│ Firebase Hosting (makaninlabs-web)    │
+│  - dist/ の静的ファイルを配信          │
+│  - SPA rewrites: 全パスを index.html に│
+│  - 自動 HTTPS（Let's Encrypt 互換）    │
+└────┬─────────────────────────────────┘
+     │ ③ 静的アセットを返す
+     │    index.html / index-{hash}.js / index-{hash}.css
+     ▼
+┌──────────┐
+│ ブラウザ │ React アプリ起動
+└────┬─────┘
+     │
+     │ ④ 外部リソースの読み込み（CDN 直接、Firebase は介在しない）
+     │
+     ├──► Google Fonts（Inter / Noto / Sawarabi Mincho）
+     ├──► Tailwind CSS（cdn.tailwindcss.com）
+     │
+     │ ⑤ お問い合わせフォーム送信
+     ▼
+┌──────────────────────────────────────┐
+│ Google Forms                          │
+│ docs.google.com/forms/.../formResponse│
+│  - 隠し iframe を target にして POST   │
+│  - 結果は紐付けスプレッドシートに記録  │
+└──────────────────────────────────────┘
+```
+
+## レイヤー別の役割
+
+### ビルド時（CI / 開発者の手元）
+
+```
+src(.tsx, .css, index.html)
+   ↓ vite build
+dist/
+   ├── index.html         # title / 静的タグ + バンドル参照
+   ├── assets/index-{hash}.js   # React + 全コンポーネントを 1 ファイルに
+   └── assets/index-{hash}.css  # index.css 由来のグローバル CSS
+   ↓ firebase deploy --only hosting
+Firebase Hosting CDN（即時反映）
+```
+
+- バンドラ：**Vite 6**（esbuild + Rollup）
+- ハッシュ付きファイル名により **CDN キャッシュは恒久的に強気で効かせられる**（`assets/*` は 1 年キャッシュ、`index.html` は短期キャッシュという Firebase デフォルト）
+
+### 配信時（ランタイム）
+
+| 層 | 役割 | 備考 |
+|---|---|---|
+| DNS | Squarespace Domains が管理 | 権威 NS は Google Cloud DNS |
+| Edge | Firebase Hosting Ingress（Fastly 経由） | 199.36.158.100、東京リージョン含む全世界エッジ |
+| TLS | Firebase が自動発行・更新 | Google Trust Services 発行、3 ヶ月ごと自動ローテーション |
+| Origin | Firebase Hosting Storage | `dist/` のスナップショット、各リリースで世代管理 |
+| クライアント | React 19 SPA | 状態管理は `useState`（Hero の scroll 検知のみ） |
+
+### 外部依存（実行時にブラウザが直接ロード）
+
+- **Tailwind CSS**：`cdn.tailwindcss.com` から JIT 生成（プロダクション化する場合はローカルビルドに切替を検討）
+- **Google Fonts**：`fonts.googleapis.com` / `fonts.gstatic.com`
+- **お問い合わせ送信**：`docs.google.com/forms/...` に隠し iframe で POST
+
+外部依存はすべて Google / Tailwind 公式の信頼できる CDN なので、CSP 観点でもシンプルに保てている。
+
+## 設計上の特徴とトレードオフ
+
+| 選択 | 利点 | 妥協点 |
+|---|---|---|
+| **静的 SPA + 外部フォーム** | サーバ管理不要、認証もなし、Firebase Hosting の月額 0 円枠で運用可能 | フォーム送信成功の確実な検知ができない（iframe 仕様）、自前のフォーム集計はできない |
+| **Tailwind CDN（JIT）** | ローカルビルド設定が不要、書いたクラスが即反映 | 本番でも CDN ロード分の RTT が増える、CSP で `script-src` 制限を強くしにくい |
+| **React SPA（CSR のみ）** | 開発体験がシンプル、Vite の HMR が高速 | SSR / SSG なしのため初回 LCP は CDN キャッシュ任せ、SEO は title / description / OGP で対応 |
+| **Firebase Hosting** | デプロイ 1 コマンド、無料枠が広い、自動 HTTPS | バックエンドが必要になった時は Cloud Functions / Cloud Run の追加が必要 |
+| **Google Forms** | 実装ゼロで送信受付が動く、スプレッドシート連動 | 細かい UX 制御不可、reCAPTCHA 等の自前対策不可 |
+
+## 将来拡張時に検討すべき変更
+
+`docs/superpowers/specs/2026-05-02-training-pivot-design.md` の「将来課題」セクションも併せて参照。
+
+- **Insights / Slides セクションの追加**：Markdown ベースで `content/` ディレクトリから読み込み、必要なら React Router 導入
+- **Tailwind のローカル化**：本番のロード時間と CSP を厳格化したい場合、CDN → ローカルビルドに切替
+- **OGP 画像の動的生成**：Cloud Functions for Firebase + Satori などでサーバレス OGP
+- **お問い合わせの自前化**：Google Forms から Cloud Run / Cloud Functions + Firestore への移行（reCAPTCHA・通知連携が必要になったら）
+
+---
+
 # デプロイ（Firebase Hosting）
 
 ## Firebase プロジェクト
