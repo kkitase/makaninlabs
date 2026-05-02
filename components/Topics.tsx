@@ -36,9 +36,9 @@ export const Topics: React.FC = () => {
             <span className="w-16 h-px bg-[#FFE600]"></span>
             Topics
           </h2>
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12">
-            <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#333333] leading-[1.5]">3 つの専門領域</h3>
-            <p className="text-[#666666] max-w-xl leading-[2.0] text-lg font-light">
+          <div className="flex flex-col gap-12 lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-start lg:gap-16">
+            <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#333333] leading-[1.5] lg:whitespace-nowrap">3 つの専門領域</h3>
+            <p className="text-[#666666] max-w-xl leading-[2.0] text-lg font-light lg:justify-self-end">
               私たちが講演・ワークショップで扱う 3 つの領域です。組織導入から実務、ハンズオンまで一貫して支援します。
             </p>
           </div>
